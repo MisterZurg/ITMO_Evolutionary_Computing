@@ -92,10 +92,10 @@ class CartPoleLeftRightEnv(CartPoleEnv):
 > </picture><br>
 >
 > Training Based
-> <video width="630" height="300" src="https://user-images.githubusercontent.com/ec_lab3_cartpole/results/training_based.mp4"></video>
+> <video width="630" height="300" src="https://github.com/MisterZurg/ITMO_Evolutionary_Computing/assets/62078213/5f49d196-486a-4108-bc06-b6ee3a6c0273"></video>
 >
 > Training Smooth
-> <video width="630" height="300" src="https://user-images.githubusercontent.com/ec_lab3_cartpole/results/training_smooth.mp4"></video>
+> <video width="630" height="300" src="https://github.com/MisterZurg/ITMO_Evolutionary_Computing/assets/62078213/62321dd1-7c8f-4f99-9c9a-ba193d007d67"></video>
 
 
 ## Graph from tensorboard
