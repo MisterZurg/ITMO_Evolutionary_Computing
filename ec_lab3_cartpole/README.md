@@ -50,10 +50,12 @@ class CartPoleLeftRightEnv(CartPoleEnv):
 ```
 
 ## Trial Status
-|Trial name |	status	| loc	| iter |	total time (s)	|ts	| reward	|num_recreated_worker s	|episode_reward_max	| episode_reward_min|
-|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
-|PPO_CartPoleLeftRightEnv_Based_46fd0_00000|	TERMINATED|	172.28.0.12:7238|	150	|1696.62	|325941|	130.33|	0|	240.3|	58.3104|
-|PPO_CartPoleLeftRightEnv_Smooth_2b8e3_00000|	TERMINATED	|172.28.0.12:19644	|150	|1619.68	|325508|	40.9529	|0	|98.1327|	3.48517|
+|                     Trial name                     |   	status	   |        loc	        | iter  | 	total time (s)	 |   ts	   |  reward	  | num_recreated_worker s	 | episode_reward_max	 | episode_reward_min |
+|:--------------------------------------------------:|:------------:|:------------------:|:-----:|:----------------:|:-------:|:---------:|:-----------------------:|:-------------------:|:------------------:|
+|     PPO_CartPoleLeftRightEnv_Based_46fd0_00000     | 	TERMINATED  | 	172.28.0.12:7238  | 	150	 |     1696.62	     | 325941  |  	130.33  |           	0            |       	240.3        |      	58.3104      |
+|    PPO_CartPoleLeftRightEnv_Smooth_2b8e3_00000     | 	TERMINATED	 | 172.28.0.12:19644	 | 150	  |     1619.68	     | 325508  | 	40.9529	 |           0	            |       98.1327       |      	3.48517      |
+| PPO_CartPoleLeftRightEnv_RewPun_Critic_65111_00000 | 	TERMINATED  | 	172.28.0.12:6830  | 	200  |     	2261.35     | 	432789 | 	353.129  |           	0            |      	601.876	      |       221.23       |
+| PPO_CartPoleLeftRightEnv_Based_Critic_8fb39_00000  |   	RUNNING   | 	172.28.0.12:19079 | 	196	 |     2147.16	     | 422154	 |  181.705  |           	0	           |      224.651	       |      6.83492       |
 
 ## Scores
 > Training Based
