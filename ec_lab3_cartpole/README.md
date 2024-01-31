@@ -21,6 +21,7 @@ def reward_based(goal, x, threshold):
 
     return 1 - (abs(threshold-x) / (threshold * 2))
 
+
 def reward_smooth(goal, x, threshold): # x -> cart_pos
     if abs(x) > threshold:
         return 0
@@ -33,21 +34,56 @@ def reward_smooth(goal, x, threshold): # x -> cart_pos
 
 ## Punishment design
 ```python
-class CartPoleLeftRightEnv(CartPoleEnv):
-    ...
-    # Based on distance to goal and angle to 0, 
-    # give different punishment from -1 to 0
-    elif self.steps_beyond_done is None:
-            # Pole just fell!
-            self.steps_beyond_done = 0
-            if time_done:
-                reward = 0.0
-            else:
-                if goal == 0:
-                    reward = (((-self.x_threshold - x) / (self.x_threshold * 2)) - (abs(theta) / self.theta_threshold_radians)) / 2
-                else:
-                    reward = (-((self.x_threshold - x) / (self.x_threshold * 2)) - (abs(theta) / self.theta_threshold_radians)) / 2
+def punish_simple(params):
+    return -100
+
+
+def reward_and_punish_critic_nogradtape(params):
+    """
+    https://www.adventuresinmachinelearning.com/
+    """
+    return 1 + np.math.cos(params["theta"])
+
+
+def punish_wool(params):
+    if params["time_done"]:
+        return 0.0
+    else:
+        x_thre = params["x_threshold"]
+        x = params["x"]
+        theta = params["theta"]
+        t_thre = params["theta_threshold_radians"]
+        if params["goal"] == 0:
+            return (((-x_thre - x) / (x_thre * 2)) - (abs(theta) / t_thre)) / 2
+        else:
+            return (-((x_thre - x) / (x_thre * 2)) - (abs(theta) / t_thre)) / 2
+
 ```
+
+> <picture>
+>   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/tip.svg">
+>   <img alt="Tip" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/tip.svg">
+> </picture><br>
+>
+> Rewards and Punishment usage
+> ```python
+> class CartPoleLeftRightEnv(CartPoleEnv):
+>    def __init__(self, env_config=None):
+>        # ...
+>        self.reward_fn = env_config["reward_fn"]
+>        self.punish_fn = env_config["punish_fn"]
+>        # ...
+>    
+>    def step(self, action):
+>        # ...        
+>        reward = 0
+>        if not done:
+>            reward = self.reward_fn(step_params)
+>        elif self.steps_beyond_done is None:
+>            # Pole just fell!
+>            self.steps_beyond_done = 0
+>            reward = self.punish_fn(step_params)
+> ```
 
 ## Trial Status
 |                     Trial name                     |   	status	   |        loc	        | iter  | 	total time (s)	 |   ts	   |  reward	  | num_recreated_worker s	 | episode_reward_max	 | episode_reward_min |
@@ -98,6 +134,18 @@ class CartPoleLeftRightEnv(CartPoleEnv):
 >
 > Training Smooth
 > <video width="630" height="300" src="https://github.com/MisterZurg/ITMO_Evolutionary_Computing/assets/62078213/62321dd1-7c8f-4f99-9c9a-ba193d007d67"></video>
+> <picture>
+>   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/warning.svg">
+>   <img alt="Warning" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/warning.svg">
+> </picture><br>
+>
+> Extra Experiments
+>
+> Training Based Critic
+> <video width="630" height="300" src="https://github.com/MisterZurg/ITMO_Evolutionary_Computing/assets/62078213/f644911d-8f46-42fb-8b90-0227a97d7553"></video>
+>
+> Training Based Punishment
+> <video width="630" height="300" src="https://github.com/MisterZurg/ITMO_Evolutionary_Computing/assets/62078213/6017f67f-4088-4c94-ba1b-4c20ab89b4a2"></video>
 
 
 ## Graph from tensorboard
